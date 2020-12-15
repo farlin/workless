@@ -78,16 +78,15 @@ Workless can be disabled by using the null scaler that will ignore the workers r
 
 <pre>
 config.after_initialize do
-  Delayed::Job.scaler = :null
+  Delayed::Workless::Scaler = :null
 end
 </pre>
 
 There are three other scalers included. Note that if you are running on the Aspen or Bamboo stacks on Heroku and you don't explicitly specify the scaler, the heroku scaler will be used automatically.
 
 <pre>
-Delayed::Job.scaler = :heroku
-Delayed::Job.scaler = :heroku
-Delayed::Job.scaler = :local
+Delayed::Workless::Scaler = :heroku
+Delayed::Workless::Scaler = :local
 </pre>
 
 The local scaler uses @adamwiggins rush library http://github.com/adamwiggins/rush to start and stop workers on a local machine. The local scaler also relies on script/delayed_job (which in turn requires the daemon gem). If you have been using foreman to run your workers, go back and see the delayed_job [setup instructions](https://github.com/collectiveidea/delayed_job/blob/master/README.md).
